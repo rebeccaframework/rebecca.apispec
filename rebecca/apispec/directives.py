@@ -51,10 +51,12 @@ def get_apispec(request):
                     elif isinstance(p, predicates.ResponsesSchemaPredicate):
                         operation["responses"] = p.content
                     elif isinstance(p, predicates.QuerySchemaPredicate):
-                        operation["parameters"].append({
-                            "in": "query",
-                            "schema": p.schema,
-                        })
+                        operation["parameters"].append(
+                            {
+                                "in": "query",
+                                "schema": p.schema,
+                            }
+                        )
                 operations[v["request_methods"].lower()] = operation
         if operations:
             apispec.path(
