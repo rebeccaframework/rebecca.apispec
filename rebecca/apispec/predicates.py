@@ -69,5 +69,9 @@ class ResponsesSchemaPredicate:
     text = phash
 
     def __call__(self, context, request):
-        request.response_schemas = self.content
+        apispec_schemas = {}
+        if hasattr(request, "apispec_schemas"):
+            apispec_schemas.update(request.apispec_schemas)
+        apispec_schemas["response_schemas"] = self.content
+        request.apispec_schemas = apispec_schemas
         return True

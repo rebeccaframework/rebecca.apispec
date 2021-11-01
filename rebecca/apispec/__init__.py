@@ -1,4 +1,4 @@
-from . import directives, predicates
+from . import directives, predicates, renderers
 
 SWAGGER_UI_VERSION = "3.52.3"
 
@@ -27,5 +27,9 @@ def includeme(config):
     config.add_static_view(
         name="apispec.redoc",
         path=f"{__name__}:static/redoc",
+    )
+    config.add_renderer(
+        name="apispec-schema",
+        factory=renderers.SchemaRenderer,
     )
     config.scan(".views")

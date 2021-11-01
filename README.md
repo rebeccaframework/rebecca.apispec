@@ -87,6 +87,19 @@ add_view(
 )
 ```
 
+## view renderers
+
+### apispec-schema
+
+render body from dumps of `responses_schema`.
+
+```
+add_view(
+   responses_schema=responses_schema=DummyResponseSchema(),
+   renderer="apispec-schema",
+)
+```
+
 ## swagger tools
 
 ### swagger ui

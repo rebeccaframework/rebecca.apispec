@@ -67,3 +67,25 @@ def test_request_body_schema_predicate(
     result = predicate(context, request)
     assert result
     assert request.data == {"value": 1}
+
+
+def test_response_schema_predicate():
+    from rebecca.apispec.predicates import ResponsesSchemaPredicate
+
+    context = testing.DummyResource()
+    request = testing.DummyRequest()
+    schema = ValueSchema()
+    predicate = ResponsesSchemaPredicate(schema, {})
+    result = predicate(context, request)
+    assert result
+    assert request.apispec_schemas == {
+        "response_schemas": {
+            "default": {
+                "content": {
+                    "application/json": {
+                        "schema": schema,
+                    },
+                },
+            },
+        },
+    }
